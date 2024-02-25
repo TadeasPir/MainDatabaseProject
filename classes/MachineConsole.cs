@@ -1,0 +1,161 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DatabaseProjectPV.classes
+{
+    //TODO: 
+    public class MachineConsole
+    {
+        public void Start()
+        {
+            try
+            {
+                MainMenu();
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Problem with access to DB.");
+            }
+            Console.WriteLine("End");
+        }
+        public void MainMenu()
+        {
+            Menu menu = new Menu("Select one option: ");
+            menu.Add(new MenuItem("Print", 
+                new Action(() => 
+                { 
+                    var m = MenuSelect(); 
+                    var item = m.Execute();
+                    item.Execute();
+                })));
+            menu.Add(new MenuItem("Add",
+                new Action(() =>
+                {
+                    var m = MenuAdd();
+                    var item = m.Execute();
+                    item.Execute();
+                })));
+            menu.Add(new MenuItem("Delete",
+              new Action(() =>
+              {
+                  var m = MenuDelete();
+                  var item = m.Execute();
+                  item.Execute();
+              })));
+            menu.Add(new MenuItem("Change",
+             new Action(() =>
+             {
+                 var m = MenuChange();
+                 var item = m.Execute();
+                 item.Execute();
+             })));
+            menu.Add(new MenuItem("Exit program", new Action(() => { exit = true; })));
+
+            while (!exit)
+            {
+                var item = menu.Execute();
+                item.Execute();
+            }
+        }
+
+        private bool exit = false;
+        
+
+        private Menu MenuSelect()
+        {
+            
+            Console.WriteLine("Select table: ");
+            MachineDAO machineDAO = new MachineDAO();
+            ReplacementDAO replacementDAO = new ReplacementDAO();
+            SparePartsDAO sparePartsDAO = new SparePartsDAO();
+            ManufacturerDAO manufacturerDAO = new ManufacturerDAO();
+            PhoneNumberDAO phoneNumberDAO = new PhoneNumberDAO();
+
+            Console.WriteLine("1. machine");
+            Console.WriteLine("2. replacement");
+            Console.WriteLine("3. spare parts");
+            Console.WriteLine("4. manufacturer");
+            Console.WriteLine("5. phone number");
+            Console.WriteLine("6. end");
+            Console.WriteLine("7. back");
+
+            int option = Convert.ToInt32(Console.ReadLine());
+
+            switch (option)
+            {
+                case 1:
+                    foreach (Machine machine in machineDAO.GetAll())
+                    {
+                       Console.WriteLine($"{machine.ToString()}");
+                    }
+                    MainMenu();
+
+                    break;
+                case 2:
+                    foreach (Replacement replacement in replacementDAO.GetAll())
+                    {
+                        Console.WriteLine($"{replacement.ToString()}");
+                    }
+                    MainMenu();
+                    break;
+                case 3:
+                   
+                    foreach (SpareParts part in sparePartsDAO.GetAll())
+                    {
+                        Console.WriteLine($"{part.ToString()}");
+                    }
+                    
+                    
+                     MainMenu();
+                    break;
+                case 4:
+                    foreach (Manufacturer manufacturer in manufacturerDAO.GetAll())
+                    {
+                        Console.WriteLine($"{manufacturer.ToString()}");
+                    }
+                    MainMenu();
+                    break;
+                case 5:
+                    foreach (var variable in phoneNumberDAO.GetAll())
+                    {
+                        Console.WriteLine($"{variable.ToString()}");
+                    }
+                    MainMenu();
+                    break;
+                case 6:
+                    Console.WriteLine("end");
+                    break;
+                case 7:
+                    MainMenu();
+                    break;
+                default: Console.WriteLine("invalid value");
+                    MainMenu();
+                    break;
+            }
+
+            return null;
+           
+        }
+        private Menu MenuAdd() 
+        {
+            return null;
+        
+        }
+        private Menu MenuDelete()
+        {
+            return null;
+
+        }
+        private Menu MenuChange()
+        {
+            return null;
+
+        }
+
+    }
+}
