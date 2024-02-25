@@ -24,7 +24,7 @@ namespace DatabaseProjectPV.classes
         public Machine()
         {
         }
-        public Machine(int id, string name, string type, string dimenX, string dimenY, string dimenZ, int price, int manufacturer_id, bool isNew)
+        public Machine(int id, string name, string type, string dimenX, string dimenY, string dimenZ, int price, float weight, int manufacturer_id, bool isNew)
         {
             ID = id;
             Name = name;
@@ -35,6 +35,7 @@ namespace DatabaseProjectPV.classes
             Price = price;
             Manufacturer_id = manufacturer_id;
             IsNew = isNew;
+            Weight = weight;
         }
 
         public Machine(string name, string type, string dimenX, string dimenY, string dimenZ, int price,float weight, int manufacturer_id, bool isNew)

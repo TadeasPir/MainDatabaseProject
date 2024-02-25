@@ -56,7 +56,7 @@ namespace DatabaseProjectPV.classes
 
             using (SqlCommand command = new SqlCommand("INSERT into Machine (type, name, dimenX, dimenY, dimenZ, price, value, manufacturer_id, isNew) values (@type, @name,@dimenX,@dimenY,@dimenZ,@price,@value,@manufacturer_id,@isNew)", conn))
             {
-                SqlDataReader reader = command.ExecuteReader();
+                
                 command.Parameters.Add(new SqlParameter("@type", machine.Type));               
                 command.Parameters.Add(new SqlParameter("@name", machine.Name));               
                 command.Parameters.Add(new SqlParameter("@dimenX", machine.DimenX));               
@@ -67,6 +67,17 @@ namespace DatabaseProjectPV.classes
                 command.Parameters.Add(new SqlParameter("@manufacturer_id", machine.Manufacturer_id));
                 command.Parameters.Add(new SqlParameter("@isNew", machine.IsNew));
 
+                try
+                {
+                    command.ExecuteNonQuery();
+                    command.CommandText = "Select @@Identity";
+                    machine.ID = Convert.ToInt32(command.ExecuteScalar());
+                }
+                catch (Exception ex)
+                {
+                
+                    Console.WriteLine("Incorrect parametrs");
+                }
 
             }
         }

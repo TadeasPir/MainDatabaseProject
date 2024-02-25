@@ -143,8 +143,79 @@ namespace DatabaseProjectPV.classes
         }
         private Menu MenuAdd() 
         {
+
+            Console.WriteLine("Add to table: ");
+            MachineDAO machineDAO = new MachineDAO();
+            ReplacementDAO replacementDAO = new ReplacementDAO();
+            SparePartsDAO sparePartsDAO = new SparePartsDAO();
+            ManufacturerDAO manufacturerDAO = new ManufacturerDAO();
+            PhoneNumberDAO phoneNumberDAO = new PhoneNumberDAO();
+
+            Console.WriteLine("1. machine");
+            Console.WriteLine("2. replacement");
+            Console.WriteLine("3. spare parts");
+            Console.WriteLine("4. manufacturer");
+            Console.WriteLine("5. phone number");
+            Console.WriteLine("6. end");
+            Console.WriteLine("7. back");
+
+            int option = Convert.ToInt32(Console.ReadLine());
+            try { 
+            switch (option)
+            {
+                case 1:
+                    Console.WriteLine("insert in order:  name, type, dimenX, dimenY, dimenZ,  price, weight,  manufacturer id,  isNew");
+                    Machine machine = new Machine(Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Convert.ToBoolean(Console.ReadLine()));
+                    MainMenu();
+
+                    break;
+                case 2:
+                    foreach (Replacement replacement in replacementDAO.GetAll())
+                    {
+                        Console.WriteLine($"{replacement.ToString()}");
+                    }
+                    MainMenu();
+                    break;
+                case 3:
+
+                    foreach (SpareParts part in sparePartsDAO.GetAll())
+                    {
+                        Console.WriteLine($"{part.ToString()}");
+                    }
+
+
+                    MainMenu();
+                    break;
+                case 4:
+                    foreach (Manufacturer manufacturer in manufacturerDAO.GetAll())
+                    {
+                        Console.WriteLine($"{manufacturer.ToString()}");
+                    }
+                    MainMenu();
+                    break;
+                case 5:
+                    foreach (var variable in phoneNumberDAO.GetAll())
+                    {
+                        Console.WriteLine($"{variable.ToString()}");
+                    }
+                    MainMenu();
+                    break;
+                case 6:
+                    Console.WriteLine("end");
+                    break;
+                case 7:
+                    MainMenu();
+                    break;
+                default:
+                    Console.WriteLine("invalid value");
+                    MainMenu();
+                    break;
+            }
+
             return null;
-        
+            }
+            catch(Exception e) { Console.WriteLine(e.Message); }
+
         }
         private Menu MenuDelete()
         {
