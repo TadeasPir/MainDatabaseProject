@@ -100,5 +100,38 @@ namespace DatabaseProjectPV.classes
 
             }
         }
+
+        public void Update(SpareParts spare)
+        {
+
+            SqlConnection conn = DatabaseSingleton.GetInstance();
+
+            using (SqlCommand command = new SqlCommand("UPDATE into SpareParts (id,type, name, dimenX, dimenY, dimenZ, price) values (@id,@type, @name,@dimenX,@dimenY,@dimenZ,@price)", conn))
+            {
+
+                command.Parameters.Add(new SqlParameter("@id", spare.ID));
+                command.Parameters.Add(new SqlParameter("@type", spare.Type));
+                command.Parameters.Add(new SqlParameter("@name", spare.Name));
+                command.Parameters.Add(new SqlParameter("@dimenX", spare.DimenX));
+                command.Parameters.Add(new SqlParameter("@dimenY", spare.DimenY));
+                command.Parameters.Add(new SqlParameter("@dimenZ", spare.DimenZ));
+                command.Parameters.Add(new SqlParameter("@price", spare.Price));
+
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                    command.CommandText = "Select @@Identity";
+                    spare.ID = Convert.ToInt32(command.ExecuteScalar());
+                    Console.WriteLine("added");
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine("Incorrect parametrs");
+                }
+
+            }
+        }
     }
 }

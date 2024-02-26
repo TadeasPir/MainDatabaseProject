@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DatabaseProjectPV.classes
 {
-    
+
     public class MachineConsole
     {
         public void Start()
@@ -26,10 +26,10 @@ namespace DatabaseProjectPV.classes
         public void MainMenu()
         {
             Menu menu = new Menu("Select one option: ");
-            menu.Add(new MenuItem("Print", 
-                new Action(() => 
-                { 
-                    var m = MenuSelect(); 
+            menu.Add(new MenuItem("Print",
+                new Action(() =>
+                {
+                    var m = MenuSelect();
                     var item = m.Execute();
                     item.Execute();
                 })));
@@ -64,11 +64,11 @@ namespace DatabaseProjectPV.classes
         }
 
         private bool exit = false;
-        
+
 
         private Menu MenuSelect()
         {
-            
+
             Console.WriteLine("Select table: ");
             MachineDAO machineDAO = new MachineDAO();
             ReplacementDAO replacementDAO = new ReplacementDAO();
@@ -91,7 +91,7 @@ namespace DatabaseProjectPV.classes
                 case 1:
                     foreach (Machine machine in machineDAO.GetAll())
                     {
-                       Console.WriteLine($"{machine.ToString()}");
+                        Console.WriteLine($"{machine.ToString()}");
                     }
                     MainMenu();
 
@@ -104,14 +104,14 @@ namespace DatabaseProjectPV.classes
                     MainMenu();
                     break;
                 case 3:
-                   
+
                     foreach (SpareParts part in sparePartsDAO.GetAll())
                     {
                         Console.WriteLine($"{part.ToString()}");
                     }
-                    
-                    
-                     MainMenu();
+
+
+                    MainMenu();
                     break;
                 case 4:
                     foreach (Manufacturer manufacturer in manufacturerDAO.GetAll())
@@ -133,15 +133,16 @@ namespace DatabaseProjectPV.classes
                 case 7:
                     MainMenu();
                     break;
-                default: Console.WriteLine("invalid value");
+                default:
+                    Console.WriteLine("invalid value");
                     MainMenu();
                     break;
             }
 
             return null;
-           
+
         }
-        private Menu MenuAdd() 
+        private Menu MenuAdd()
         {
 
             Console.WriteLine("Add to table: ");
@@ -160,27 +161,28 @@ namespace DatabaseProjectPV.classes
             Console.WriteLine("7. back");
 
             int option = Convert.ToInt32(Console.ReadLine());
-            try { 
-            switch (option)
+            try
             {
-                case 1:
-                    Console.WriteLine("insert in order:  name, type, dimenX, dimenY, dimenZ,  price, weight,  manufacturer id,  isNew");
-                    Machine machine = new Machine(Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), (float)Convert.ToDouble(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Convert.ToBoolean(Console.ReadLine()));
-                    machineDAO.Save(machine);
-
-                    MainMenu();
-
-                    break;
-                case 2:
-                        
-                        Console.WriteLine("insert in order:  machine id,spare parts id,date");
-                        Replacement replacement = new Replacement(Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()),Convert.ToDateTime(Console.ReadLine()));
-                        replacementDAO.Save(replacement);
-                       
+                switch (option)
+                {
+                    case 1:
+                        Console.WriteLine("insert in order:  name, type, dimenX, dimenY, dimenZ,  price, weight,  manufacturer id,  isNew");
+                        Machine machine = new Machine(Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), (float)Convert.ToDouble(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Convert.ToBoolean(Console.ReadLine()));
+                        machineDAO.Save(machine);
 
                         MainMenu();
-                    break;
-                case 3:
+
+                        break;
+                    case 2:
+
+                        Console.WriteLine("insert in order:  machine id,spare parts id,date");
+                        Replacement replacement = new Replacement(Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Convert.ToDateTime(Console.ReadLine()));
+                        replacementDAO.Save(replacement);
+
+
+                        MainMenu();
+                        break;
+                    case 3:
 
                         Console.WriteLine("insert in order:  name, type, dimenX, dimenY, dimenZ,  price");
                         SpareParts spareParts = new SpareParts(Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Convert.ToInt32(Console.ReadLine()));
@@ -188,35 +190,35 @@ namespace DatabaseProjectPV.classes
 
 
                         MainMenu();
-                    break;
-                case 4:
+                        break;
+                    case 4:
                         Console.WriteLine("insert name of manufacturer");
                         Manufacturer manufacturer = new Manufacturer(Console.ReadLine());
                         manufacturerDAO.Save(manufacturer);
                         MainMenu();
-                    break;
-                case 5:
+                        break;
+                    case 5:
                         Console.WriteLine("insert in order:  manufacturer id, phone number");
-                        PhoneNumber phoneNumber = new PhoneNumber( Convert.ToInt32(Console.ReadLine()), Console.ReadLine());
+                        PhoneNumber phoneNumber = new PhoneNumber(Convert.ToInt32(Console.ReadLine()), Console.ReadLine());
                         phoneNumberDAO.Save(phoneNumber);
-                        
-                        MainMenu();
-                    break;
-                case 6:
-                    Console.WriteLine("end");
-                    break;
-                case 7:
-                    MainMenu();
-                    break;
-                default:
-                    Console.WriteLine("invalid value");
-                    MainMenu();
-                    break;
-            }
 
-           
+                        MainMenu();
+                        break;
+                    case 6:
+                        Console.WriteLine("end");
+                        break;
+                    case 7:
+                        MainMenu();
+                        break;
+                    default:
+                        Console.WriteLine("invalid value");
+                        MainMenu();
+                        break;
+                }
+
+
             }
-            catch(Exception e) { Console.WriteLine(e.Message); }
+            catch (Exception e) { Console.WriteLine(e.Message); }
             return null;
         }
         private Menu MenuDelete()
@@ -296,9 +298,81 @@ namespace DatabaseProjectPV.classes
         }
         private Menu MenuChange()
         {
+            Console.WriteLine("Change in table: ");
+            MachineDAO machineDAO = new MachineDAO();
+            ReplacementDAO replacementDAO = new ReplacementDAO();
+            SparePartsDAO sparePartsDAO = new SparePartsDAO();
+            ManufacturerDAO manufacturerDAO = new ManufacturerDAO();
+            PhoneNumberDAO phoneNumberDAO = new PhoneNumberDAO();
+
+            Console.WriteLine("1. machine");
+            Console.WriteLine("2. replacement");
+            Console.WriteLine("3. spare parts");
+            Console.WriteLine("4. manufacturer");
+            Console.WriteLine("5. phone number");
+            Console.WriteLine("6. end");
+            Console.WriteLine("7. back");
+
+            int option = Convert.ToInt32(Console.ReadLine());
+            try
+            {
+                switch (option)
+                {
+                    case 1:
+                        Console.WriteLine("insert in order:  id,name, type, dimenX, dimenY, dimenZ,  price, weight,  manufacturer id,  isNew");
+                        Machine machine = new Machine(Convert.ToInt32(Console.ReadLine()), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), (float)Convert.ToDouble(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Convert.ToBoolean(Console.ReadLine()));
+                        machineDAO.Save(machine);
+
+                        MainMenu();
+
+                        break;
+                    case 2:
+
+                        Console.WriteLine("insert in order: id, machine id,spare parts id,date");
+                        Replacement replacement = new Replacement(Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Convert.ToDateTime(Console.ReadLine()));
+                        replacementDAO.Save(replacement);
+
+
+                        MainMenu();
+                        break;
+                    case 3:
+
+                        Console.WriteLine("insert in order:  id, name, type, dimenX, dimenY, dimenZ,  price");
+                        SpareParts spareParts = new SpareParts(Convert.ToInt32(Console.ReadLine()), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Convert.ToInt32(Console.ReadLine()));
+                        sparePartsDAO.Save(spareParts);
+
+
+                        MainMenu();
+                        break;
+                    case 4:
+                        Console.WriteLine("insert id + name of manufacturer");
+                        Manufacturer manufacturer = new Manufacturer(Convert.ToInt32(Console.ReadLine()), Console.ReadLine());
+                        manufacturerDAO.Save(manufacturer);
+                        MainMenu();
+                        break;
+                    case 5:
+                        Console.WriteLine("insert in order:  id, manufacturer id, phone number");
+                        PhoneNumber phoneNumber = new PhoneNumber(Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Console.ReadLine());
+                        phoneNumberDAO.Save(phoneNumber);
+
+                        MainMenu();
+                        break;
+                    case 6:
+                        Console.WriteLine("end");
+                        break;
+                    case 7:
+                        MainMenu();
+                        break;
+                    default:
+                        Console.WriteLine("invalid value");
+                        MainMenu();
+                        break;
+                }
+
+
+            }
+            catch (Exception e) { Console.WriteLine(e.Message); }
             return null;
-
         }
-
     }
 }

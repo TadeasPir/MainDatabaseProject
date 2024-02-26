@@ -103,5 +103,44 @@ namespace DatabaseProjectPV.classes
 
             }
         }
+
+        public void Update(Machine machine)
+        {
+            SqlConnection conn = DatabaseSingleton.GetInstance();
+
+            using (SqlCommand command = new SqlCommand("UPDATE into Machine (id,type, name, dimenX, dimenY, dimenZ, price, value, manufacturer_id, isNew) values (@id,@type, @name,@dimenX,@dimenY,@dimenZ,@price,@value,@manufacturer_id,@isNew)", conn))
+            {
+
+                command.Parameters.Add(new SqlParameter("@id", machine.Type));
+                command.Parameters.Add(new SqlParameter("@type", machine.Type));
+                command.Parameters.Add(new SqlParameter("@name", machine.Name));
+                command.Parameters.Add(new SqlParameter("@dimenX", machine.DimenX));
+                command.Parameters.Add(new SqlParameter("@dimenY", machine.DimenY));
+                command.Parameters.Add(new SqlParameter("@dimenZ", machine.DimenZ));
+                command.Parameters.Add(new SqlParameter("@price", machine.Price));
+                command.Parameters.Add(new SqlParameter("@value", machine.Weight));
+                command.Parameters.Add(new SqlParameter("@manufacturer_id", machine.Manufacturer_id));
+                command.Parameters.Add(new SqlParameter("@isNew", machine.IsNew));
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                    command.CommandText = "Select @@Identity";
+                    machine.ID = Convert.ToInt32(command.ExecuteScalar());
+                    Console.WriteLine("added");
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine("Incorrect parametrs");
+                }
+
+            }
+        }
+     
+            
+
+
+        
     }
 }

@@ -12,13 +12,11 @@ namespace DatabaseProjectPV.classes
         private int spareParts_id;
         private int machine_id;
         private DateTime dateTime;
-        public Replacement(int id, int spareParts_id, int machine_id, DateTime dateTime, int iD)
+        public Replacement(int id, int spareParts_id, int machine_id, DateTime dateTime)
         {
             ID = id;
             SpareParts_id = spareParts_id;
             Machine_id = machine_id;
-            this.dateTime = dateTime;
-            ID = iD;
             DateTime = dateTime;
         }
         public Replacement( int spareParts_id, int machine_id, DateTime dateTime)

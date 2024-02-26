@@ -9,7 +9,7 @@ namespace DatabaseProjectPV.classes
     public interface IRepozitory<T> where T : IBaseClass
     {
         T GetByID(int id);
-        IEnumerable<T> GetAll();
+        void Update(T element);
         void Save(T element);
         void Delete(int id);
     }

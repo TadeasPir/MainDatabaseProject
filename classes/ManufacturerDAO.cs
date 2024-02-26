@@ -90,5 +90,34 @@ namespace DatabaseProjectPV.classes
 
             }
         }
+
+        public void Update(Manufacturer manufacturer)
+        {
+
+            SqlConnection conn = DatabaseSingleton.GetInstance();
+            using (SqlCommand command = new SqlCommand("INSERT into Manufacturer (id, name) values (@id,@name)", conn))
+            {
+
+                command.Parameters.Add(new SqlParameter("@id", manufacturer.ID));
+                command.Parameters.Add(new SqlParameter("@name", manufacturer.Name));
+
+
+
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                    command.CommandText = "Select @@Identity";
+                    manufacturer.ID = Convert.ToInt32(command.ExecuteScalar());
+                    Console.WriteLine("added");
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine("Incorrect parametrs");
+                }
+
+            }
+        }
     }
 }

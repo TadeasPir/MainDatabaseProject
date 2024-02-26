@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -92,9 +93,35 @@ namespace DatabaseProjectPV.classes
             }
         }
 
-        IEnumerable<PhoneNumber> IRepozitory<PhoneNumber>.GetAll()
+        public void Update(PhoneNumber phone)
         {
-            throw new NotImplementedException();
+            SqlConnection conn = DatabaseSingleton.GetInstance();
+
+            using (SqlCommand command = new SqlCommand("UPDATE into PhoneNumber (id phoneNumber, manufacturer_id) values (@id,@phoneNumber,@manufacturer_id)", conn))
+            {
+
+                command.Parameters.Add(new SqlParameter("@id", phone.ID));
+                command.Parameters.Add(new SqlParameter("@phoneNumber", phone.TelephoneNumber));
+                command.Parameters.Add(new SqlParameter("@manufacturer_id", phone.Manufacturer_id));
+
+
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                    command.CommandText = "Select @@Identity";
+                    phone.ID = Convert.ToInt32(command.ExecuteScalar());
+                    Console.WriteLine("added");
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine("Incorrect parametrs");
+                }
+
+            }
         }
+
+      
     }
 }

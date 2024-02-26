@@ -97,5 +97,35 @@ namespace DatabaseProjectPV.classes
 
             }
         }
+
+        public void Update(Replacement replacement)
+        {
+            SqlConnection conn = DatabaseSingleton.GetInstance();
+
+            using (SqlCommand command = new SqlCommand("INSERT into Replacement (id, machine_id, spareParts_id,date) values (@id,@machine_id,@spareParts_id,@date)", conn))
+            {
+
+                command.Parameters.Add(new SqlParameter("@id", replacement.ID));
+                command.Parameters.Add(new SqlParameter("@machine_id", replacement.Machine_id));
+                command.Parameters.Add(new SqlParameter("@spareParts_id", replacement.SpareParts_id));
+                command.Parameters.Add(new SqlParameter("@date", replacement.DateTime));
+
+
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                    command.CommandText = "Select @@Identity";
+                    replacement.ID = Convert.ToInt32(command.ExecuteScalar());
+                    Console.WriteLine("added");
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine("Incorrect parametrs");
+                }
+
+            }
+        }
     }
 }
