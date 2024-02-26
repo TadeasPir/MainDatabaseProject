@@ -9,7 +9,8 @@ namespace DatabaseProjectPV.classes
 {
     public class ReplacementDAO : IRepozitory<Replacement>
     {
-        public void Delete(Replacement element)
+
+        public void Delete(int id)
         {
             throw new NotImplementedException();
         }

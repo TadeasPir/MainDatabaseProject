@@ -25,7 +25,7 @@ namespace DatabaseProjectPV.classes
         public void Execute()
         {
             action();
-            //akce.Invoke();
+            
         }
     }
 }

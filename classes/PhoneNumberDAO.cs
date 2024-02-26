@@ -9,7 +9,8 @@ namespace DatabaseProjectPV.classes
 {
     public class PhoneNumberDAO : IRepozitory<PhoneNumber>
     {
-        public void Delete(PhoneNumber element)
+      
+        public void Delete(int id)
         {
             throw new NotImplementedException();
         }

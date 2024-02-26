@@ -9,7 +9,9 @@ namespace DatabaseProjectPV.classes
 {
     public class SparePartsDAO : IRepozitory<SpareParts>
     {
-        public void Delete(SpareParts element)
+     
+
+        public void Delete(int id)
         {
             throw new NotImplementedException();
         }

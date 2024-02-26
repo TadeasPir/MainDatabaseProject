@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,9 +11,29 @@ namespace DatabaseProjectPV.classes
 {
     internal class MachineDAO : IRepozitory<Machine>
     {
-        public void Delete(Machine element)
+        public void Delete(int x)
         {
-            throw new NotImplementedException();
+            SqlConnection conn = DatabaseSingleton.GetInstance();
+
+            using (SqlCommand command = new SqlCommand("DELETE from Machine where id = @id", conn))
+            {
+
+                command.Parameters.Add(new SqlParameter("@id", x));
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                    
+
+                    Console.WriteLine("deleted");
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine("Incorrect parametrs");
+                }
+
+            }
         }
 
         public IEnumerable<Machine> GetAll()

@@ -11,6 +11,6 @@ namespace DatabaseProjectPV.classes
         T GetByID(int id);
         IEnumerable<T> GetAll();
         void Save(T element);
-        void Delete(T element);
+        void Delete(int id);
     }
 }

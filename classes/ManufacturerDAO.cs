@@ -9,7 +9,8 @@ namespace DatabaseProjectPV.classes
 {
     public class ManufacturerDAO : IRepozitory<Manufacturer>
     {
-        public void Delete(Manufacturer element)
+      
+        public void Delete(int id)
         {
             throw new NotImplementedException();
         }
