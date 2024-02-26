@@ -13,7 +13,29 @@ namespace DatabaseProjectPV.classes
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            {
+                SqlConnection conn = DatabaseSingleton.GetInstance();
+
+                using (SqlCommand command = new SqlCommand("DELETE from Replacement where id = @id", conn))
+                {
+
+                    command.Parameters.Add(new SqlParameter("@id", id));
+
+                    try
+                    {
+                        command.ExecuteNonQuery();
+
+
+                        Console.WriteLine("deleted");
+                    }
+                    catch (Exception ex)
+                    {
+
+                        Console.WriteLine("Incorrect parametrs");
+                    }
+
+                }
+            }
         }
 
         public IEnumerable<Replacement> GetAll()

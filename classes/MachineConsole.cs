@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DatabaseProjectPV.classes
 {
-    //TODO: 
+    
     public class MachineConsole
     {
         public void Start()
@@ -183,22 +183,21 @@ namespace DatabaseProjectPV.classes
                 case 3:
 
                         Console.WriteLine("insert in order:  name, type, dimenX, dimenY, dimenZ,  price");
-                        SpareParts spareParts = new SpareParts();
+                        SpareParts spareParts = new SpareParts(Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Convert.ToInt32(Console.ReadLine()));
                         sparePartsDAO.Save(spareParts);
 
 
                         MainMenu();
                     break;
                 case 4:
-                    foreach (Manufacturer manufacturer in manufacturerDAO.GetAll())
-                    {
-                        Console.WriteLine($"{manufacturer.ToString()}");
-                    }
-                    MainMenu();
+                        Console.WriteLine("insert name of manufacturer");
+                        Manufacturer manufacturer = new Manufacturer(Console.ReadLine());
+                        manufacturerDAO.Save(manufacturer);
+                        MainMenu();
                     break;
                 case 5:
-                        Console.WriteLine("insert in order:  phone number, manufacturer id");
-                        PhoneNumber phoneNumber = new PhoneNumber();
+                        Console.WriteLine("insert in order:  manufacturer id, phone number");
+                        PhoneNumber phoneNumber = new PhoneNumber( Convert.ToInt32(Console.ReadLine()), Console.ReadLine());
                         phoneNumberDAO.Save(phoneNumber);
                         
                         MainMenu();
@@ -236,7 +235,7 @@ namespace DatabaseProjectPV.classes
             Console.WriteLine("5. phone number");
             Console.WriteLine("6. end");
             Console.WriteLine("7. back");
-
+            int index;
             int option = Convert.ToInt32(Console.ReadLine());
             try
             {
@@ -244,41 +243,37 @@ namespace DatabaseProjectPV.classes
                 {
                     case 1:
                         Console.WriteLine("insert index for deletion");
-                        int index = Convert.ToInt32(Console.ReadLine());
+                        index = Convert.ToInt32(Console.ReadLine());
                         machineDAO.Delete(index);
 
                         MainMenu();
 
                         break;
                     case 2:
-                        foreach (Replacement replacement in replacementDAO.GetAll())
-                        {
-                            Console.WriteLine($"{replacement.ToString()}");
-                        }
+                        Console.WriteLine("insert index for deletion");
+                        index = Convert.ToInt32(Console.ReadLine());
+                        replacementDAO.Delete(index);
                         MainMenu();
                         break;
                     case 3:
 
-                        foreach (SpareParts part in sparePartsDAO.GetAll())
-                        {
-                            Console.WriteLine($"{part.ToString()}");
-                        }
+                        Console.WriteLine("insert index for deletion");
+                        index = Convert.ToInt32(Console.ReadLine());
+                        sparePartsDAO.Delete(index);
 
 
                         MainMenu();
                         break;
                     case 4:
-                        foreach (Manufacturer manufacturer in manufacturerDAO.GetAll())
-                        {
-                            Console.WriteLine($"{manufacturer.ToString()}");
-                        }
+                        Console.WriteLine("insert index for deletion");
+                        index = Convert.ToInt32(Console.ReadLine());
+                        manufacturerDAO.Delete(index);
                         MainMenu();
                         break;
                     case 5:
-                        foreach (var variable in phoneNumberDAO.GetAll())
-                        {
-                            Console.WriteLine($"{variable.ToString()}");
-                        }
+                        Console.WriteLine("insert index for deletion");
+                        index = Convert.ToInt32(Console.ReadLine());
+                        phoneNumberDAO.Delete(index);
                         MainMenu();
                         break;
                     case 6:

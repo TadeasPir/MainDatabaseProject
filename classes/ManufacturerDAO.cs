@@ -12,7 +12,29 @@ namespace DatabaseProjectPV.classes
       
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            {
+                SqlConnection conn = DatabaseSingleton.GetInstance();
+
+                using (SqlCommand command = new SqlCommand("DELETE from Manufacturer where id = @id", conn))
+                {
+
+                    command.Parameters.Add(new SqlParameter("@id", id));
+
+                    try
+                    {
+                        command.ExecuteNonQuery();
+
+
+                        Console.WriteLine("deleted");
+                    }
+                    catch (Exception ex)
+                    {
+
+                        Console.WriteLine("Incorrect parametrs");
+                    }
+
+                }
+            }
         }
 
         public IEnumerable<Manufacturer> GetAll()
@@ -41,9 +63,32 @@ namespace DatabaseProjectPV.classes
             throw new NotImplementedException();
         }
 
-        public void Save(Manufacturer element)
+        public void Save(Manufacturer  manufacturer)
         {
-            throw new NotImplementedException();
+
+            SqlConnection conn = DatabaseSingleton.GetInstance();
+            using (SqlCommand command = new SqlCommand("INSERT into Manufacturer ( name) values (@name)", conn))
+            {
+
+                command.Parameters.Add(new SqlParameter("@name", manufacturer.Name));
+                
+
+
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                    command.CommandText = "Select @@Identity";
+                    manufacturer.ID = Convert.ToInt32(command.ExecuteScalar());
+                    Console.WriteLine("added");
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine("Incorrect parametrs");
+                }
+
+            }
         }
     }
 }
