@@ -172,21 +172,22 @@ namespace DatabaseProjectPV.classes
 
                     break;
                 case 2:
-                    foreach (Replacement replacement in replacementDAO.GetAll())
-                    {
-                        Console.WriteLine($"{replacement.ToString()}");
-                    }
-                    MainMenu();
+                        
+                        Console.WriteLine("insert in order:  machine id,spare parts id,date");
+                        Replacement replacement = new Replacement(Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()),Convert.ToDateTime(Console.ReadLine()));
+                        replacementDAO.Save(replacement);
+                       
+
+                        MainMenu();
                     break;
                 case 3:
 
-                    foreach (SpareParts part in sparePartsDAO.GetAll())
-                    {
-                        Console.WriteLine($"{part.ToString()}");
-                    }
+                        Console.WriteLine("insert in order:  name, type, dimenX, dimenY, dimenZ,  price");
+                        SpareParts spareParts = new SpareParts();
+                        sparePartsDAO.Save(spareParts);
 
 
-                    MainMenu();
+                        MainMenu();
                     break;
                 case 4:
                     foreach (Manufacturer manufacturer in manufacturerDAO.GetAll())
@@ -196,11 +197,11 @@ namespace DatabaseProjectPV.classes
                     MainMenu();
                     break;
                 case 5:
-                    foreach (var variable in phoneNumberDAO.GetAll())
-                    {
-                        Console.WriteLine($"{variable.ToString()}");
-                    }
-                    MainMenu();
+                        Console.WriteLine("insert in order:  phone number, manufacturer id");
+                        PhoneNumber phoneNumber = new PhoneNumber();
+                        phoneNumberDAO.Save(phoneNumber);
+                        
+                        MainMenu();
                     break;
                 case 6:
                     Console.WriteLine("end");

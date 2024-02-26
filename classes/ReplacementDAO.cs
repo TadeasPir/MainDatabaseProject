@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -46,9 +47,33 @@ namespace DatabaseProjectPV.classes
             throw new NotImplementedException();
         }
 
-        public void Save(Replacement element)
+        public void Save(Replacement replacement)
         {
-            throw new NotImplementedException();
+            SqlConnection conn = DatabaseSingleton.GetInstance();
+
+            using (SqlCommand command = new SqlCommand("INSERT into Replacement ( machine_id, spareParts_id,date) values (@machine_id,@spareParts_id,@date)", conn))
+            {
+
+                command.Parameters.Add(new SqlParameter("@machine_id", replacement.Machine_id));
+                command.Parameters.Add(new SqlParameter("@spareParts_id", replacement.SpareParts_id));
+                command.Parameters.Add(new SqlParameter("@date", replacement.DateTime));
+
+
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                    command.CommandText = "Select @@Identity";
+                    replacement.ID = Convert.ToInt32(command.ExecuteScalar());
+                    Console.WriteLine("added");
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine("Incorrect parametrs");
+                }
+
+            }
         }
     }
 }

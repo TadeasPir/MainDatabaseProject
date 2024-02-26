@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -47,9 +48,35 @@ namespace DatabaseProjectPV.classes
             throw new NotImplementedException();
         }
 
-        public void Save(SpareParts element)
+        public void Save(SpareParts spare)
         {
-            throw new NotImplementedException();
+            SqlConnection conn = DatabaseSingleton.GetInstance();
+
+            using (SqlCommand command = new SqlCommand("INSERT into SpareParts (type, name, dimenX, dimenY, dimenZ, price) values (@type, @name,@dimenX,@dimenY,@dimenZ,@price)", conn))
+            {
+
+                command.Parameters.Add(new SqlParameter("@type", spare.Type));
+                command.Parameters.Add(new SqlParameter("@name", spare.Name));
+                command.Parameters.Add(new SqlParameter("@dimenX", spare.DimenX));
+                command.Parameters.Add(new SqlParameter("@dimenY", spare.DimenY));
+                command.Parameters.Add(new SqlParameter("@dimenZ", spare.DimenZ));
+                command.Parameters.Add(new SqlParameter("@price", spare.Price));
+              
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                    command.CommandText = "Select @@Identity";
+                    spare.ID = Convert.ToInt32(command.ExecuteScalar());
+                    Console.WriteLine("added");
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine("Incorrect parametrs");
+                }
+
+            }
         }
     }
 }

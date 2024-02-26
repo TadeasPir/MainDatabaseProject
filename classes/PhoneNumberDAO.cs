@@ -42,9 +42,32 @@ namespace DatabaseProjectPV.classes
             throw new NotImplementedException();
         }
 
-        public void Save(PhoneNumber element)
+        public void Save(PhoneNumber phone)
         {
-            throw new NotImplementedException();
+            SqlConnection conn = DatabaseSingleton.GetInstance();
+
+            using (SqlCommand command = new SqlCommand("INSERT into PhoneNumber ( phoneNumber, manufacturer_id) values (@phoneNumber,@manufacturer_id)", conn))
+            {
+
+                command.Parameters.Add(new SqlParameter("@phoneNumber", phone.TelephoneNumber));
+                command.Parameters.Add(new SqlParameter("@manufacturer_id", phone.Manufacturer_id));
+                
+
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                    command.CommandText = "Select @@Identity";
+                    phone.ID = Convert.ToInt32(command.ExecuteScalar());
+                    Console.WriteLine("added");
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine("Incorrect parametrs");
+                }
+
+            }
         }
 
         IEnumerable<PhoneNumber> IRepozitory<PhoneNumber>.GetAll()
