@@ -11,7 +11,7 @@ namespace DatabaseProjectPV
                 MachineConsole myConsole = new MachineConsole();
                 myConsole.Start();
             }
-            catch (Exception ex) {  }
+            catch (Exception ex) { Console.WriteLine(ex.Message);  }
          
         }
     }

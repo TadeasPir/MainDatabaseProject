@@ -19,7 +19,7 @@ namespace DatabaseProjectPV.classes
         private int price;
         private int manufacturer_id;
         private bool isNew;
-
+        
 
         public Machine()
         {

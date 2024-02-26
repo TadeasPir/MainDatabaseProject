@@ -165,7 +165,9 @@ namespace DatabaseProjectPV.classes
             {
                 case 1:
                     Console.WriteLine("insert in order:  name, type, dimenX, dimenY, dimenZ,  price, weight,  manufacturer id,  isNew");
-                    Machine machine = new Machine(Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Convert.ToBoolean(Console.ReadLine()));
+                    Machine machine = new Machine(Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), (float)Convert.ToDouble(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Convert.ToBoolean(Console.ReadLine()));
+                    machineDAO.Save(machine);
+
                     MainMenu();
 
                     break;
@@ -212,10 +214,10 @@ namespace DatabaseProjectPV.classes
                     break;
             }
 
-            return null;
+           
             }
             catch(Exception e) { Console.WriteLine(e.Message); }
-
+            return null;
         }
         private Menu MenuDelete()
         {

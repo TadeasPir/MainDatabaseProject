@@ -72,6 +72,7 @@ namespace DatabaseProjectPV.classes
                     command.ExecuteNonQuery();
                     command.CommandText = "Select @@Identity";
                     machine.ID = Convert.ToInt32(command.ExecuteScalar());
+                    Console.WriteLine("added");
                 }
                 catch (Exception ex)
                 {
