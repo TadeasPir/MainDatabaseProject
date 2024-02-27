@@ -53,9 +53,12 @@ Below is an example of how to use the application:
 
 
 ## How to use import
+'''xml
 <myxml>
    <someElement />  
 </myxml>
+'''
+
 
 
 ## Dependencies
