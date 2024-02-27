@@ -7,6 +7,10 @@ using System.Xml.Linq;
 
 namespace DatabaseProjectPV.classes
 {
+    /// <summary>
+    /// Represents a machine table in database.
+    /// </summary>
+
     public class Machine : IBaseClass
     {
         private int id;

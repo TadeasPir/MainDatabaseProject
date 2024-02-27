@@ -8,13 +8,21 @@ using System.Threading.Tasks;
 
 namespace DatabaseProjectPV.classes
 {
+    /// <summary>
+    /// Represents a singleton class for managing database connections.
+    /// </summary>
     public class DatabaseSingleton
     {
 		private static SqlConnection conn = null;
 		private DatabaseSingleton()
 		{
 		}
-		public static SqlConnection GetInstance()
+
+        /// <summary>
+        /// Gets the singleton instance of the database connection.
+        /// </summary>
+        /// <returns>The singleton instance of the SqlConnection object.</returns>
+        public static SqlConnection GetInstance()
 		{
 			if (conn == null)
 			{
@@ -39,7 +47,12 @@ namespace DatabaseProjectPV.classes
 			}
 		}
 
-		private static string ReadSetting(string key)
+        /// <summary>
+        /// Reads a setting value from the application's configuration file.
+        /// </summary>
+        /// <param name="key">The key of the setting to read.</param>
+        /// <returns>The value of the setting if found, otherwise "Not Found".</returns>
+        private static string ReadSetting(string key)
 		{
 			
 			var appSettings = ConfigurationManager.AppSettings;

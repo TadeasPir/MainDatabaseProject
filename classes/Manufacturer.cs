@@ -7,6 +7,10 @@ using System.Xml.Linq;
 
 namespace DatabaseProjectPV.classes
 {
+
+    /// <summary>
+    /// Represents a manufacturer entity.
+    /// </summary>
     public class Manufacturer : IBaseClass
     {
         private int id;
