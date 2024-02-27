@@ -53,6 +53,7 @@ Below is an example of how to use the application:
 
 
 ## How to use import
+1. Open pre made file in ``` "\bin\Debug\net6.0\Import.xml"```
 ```xml
 <data>
     <manufacturer>
