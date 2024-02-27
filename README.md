@@ -1,6 +1,6 @@
 # Database Management Application
 
-The Database Management Application is a console-based tool designed to interact with a database for managing information related to machines and related entities.
+The Database Management Application is a console-based tool designed to interact with a database to manage information related to machines and entities.
 
 ## Features
 
@@ -30,15 +30,7 @@ The Database Management Application is a console-based tool designed to interact
 ### Usage
 
 1. Navigate to the project directory in your command-line interface.
-2. Build the solution using the following command:
-    ```
-    dotnet build
-    ```
-3. Run the application using the following command:
-    ```
-    dotnet run
-    ```
-4. Follow the on-screen instructions to perform various database operations:
+2. Follow the on-screen instructions to perform various database operations:
     - Select one of the options provided in the main menu.
     - Follow the prompts to execute specific actions such as viewing, adding, deleting, updating, or importing data.
 
@@ -53,7 +45,8 @@ Below is an example of how to use the application:
 
 
 ## How to use import
-1. Open pre made file in ``` "\bin\Debug\net6.0\Import.xml"```
+1. Open a pre-made file named Import.xml in ``` "\bin\Debug\net6.0\Import.xml"```
+2. insert data in a similar pattern as shown below.
 ```xml
 <data>
     <manufacturer>
@@ -73,7 +66,6 @@ Below is an example of how to use the application:
 ## Dependencies
 
 - .NET Core SDK
-- Entity Framework Core
 - SQL Server database
 
 
