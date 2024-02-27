@@ -8,6 +8,7 @@ namespace DatabaseProjectPV
         {
             try
             {
+             
                 MachineConsole myConsole = new MachineConsole();
                 myConsole.Start();
             }

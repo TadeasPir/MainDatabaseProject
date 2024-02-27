@@ -71,6 +71,11 @@ namespace DatabaseProjectPV.classes
             throw new NotImplementedException();
         }
 
+        public void Import(string fileName)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Save(Machine machine)
         {
             SqlConnection conn = DatabaseSingleton.GetInstance();

@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace DatabaseProjectPV.classes
 {
@@ -61,6 +62,29 @@ namespace DatabaseProjectPV.classes
         public Manufacturer GetByID(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public void Import(string fileName)
+        {
+            XmlDocument document = new XmlDocument();
+            document.Load(fileName); 
+            XmlNodeList nodes = document.SelectNodes("/data/manufacturer");
+            Manufacturer manufacturer;
+           
+
+            foreach (XmlNode node in nodes) 
+            {
+           
+                string name  = node.SelectSingleNode("name").InnerText;
+
+
+                manufacturer = new Manufacturer(name);
+                Save(manufacturer);
+
+
+            }
+
+
         }
 
         public void Save(Manufacturer  manufacturer)
