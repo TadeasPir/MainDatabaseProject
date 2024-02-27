@@ -53,11 +53,19 @@ Below is an example of how to use the application:
 
 
 ## How to use import
-'''xml
-<myxml>
-   <someElement />  
-</myxml>
-'''
+```
+<data>
+    <manufacturer>
+        <name>Jecna.inc</name>
+    </manufacturer>
+    <manufacturer>
+        <name>Zitna.inc</name>
+    </manufacturer>
+    <manufacturer>
+        <name>Panska.inc</name>
+    </manufacturer>
+</data>
+```
 
 
 
