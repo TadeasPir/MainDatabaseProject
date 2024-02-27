@@ -56,13 +56,10 @@ Below is an example of how to use the application:
 - Entity Framework Core
 - SQL Server database
 
-## Contributing
-
-Contributions are welcome! Please follow the [contribution guidelines](CONTRIBUTING.md).
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License]([LICENSE](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt)).
 
 ## Acknowledgements
 
