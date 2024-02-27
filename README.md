@@ -46,9 +46,17 @@ The Database Management Application is a console-based tool designed to interact
 
 Below is an example of how to use the application:
 
-1. Start the application by running `dotnet run`.
+1. Start the application.
 2. Choose the desired operation from the main menu (e.g., "Print").
 3. Follow the prompts to view, add, delete, update, or import data as needed.
+
+
+
+## How to use import
+<myxml>
+   <someElement />  
+</myxml>
+
 
 ## Dependencies
 
