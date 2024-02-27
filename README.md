@@ -24,7 +24,7 @@ The Database Management Application is a console-based tool designed to interact
 
 ### Configuration
 
-1. Open the `appsettings.json` file.
+1. Open the `App.config` file.
 2. Update the connection string with your SQL Server database credentials and database name.
 
 ### Usage
@@ -61,6 +61,3 @@ Below is an example of how to use the application:
 
 This project is licensed under the [MIT License](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt).
 
-## Acknowledgements
-
-Special thanks to the creators and maintainers of the .NET Core SDK, Entity Framework Core, and SQL Server.
