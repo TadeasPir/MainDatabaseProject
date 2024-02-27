@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace DatabaseProjectPV.classes
 {
@@ -73,7 +74,30 @@ namespace DatabaseProjectPV.classes
 
         public void Import(string fileName)
         {
-            throw new NotImplementedException();
+            XmlDocument document = new XmlDocument();
+            document.Load(fileName);
+            XmlNodeList nodes = document.SelectNodes("/data/machine");
+            Machine machine;
+
+
+            foreach (XmlNode node in nodes)
+            {
+
+                string name = node.SelectSingleNode("name").InnerText;
+                string dimenX = node.SelectSingleNode("dimenX").InnerText;
+                string dimenY = node.SelectSingleNode("dimenY").InnerText;
+                string dimenZ = node.SelectSingleNode("dimenZ").InnerText;
+                string type = node.SelectSingleNode("type").InnerText;
+                int price = int.Parse(node.SelectSingleNode("price").InnerText);
+                float weight = float.Parse(node.SelectSingleNode("value").InnerText);
+                int manufacturer_id = int.Parse(node.SelectSingleNode("manufacturer_id").InnerText);
+                bool isNew = bool.Parse(node.SelectSingleNode("manufacturer_id").InnerText);
+
+                machine = new Machine(name, type, dimenX, dimenY, dimenZ, price, weight,manufacturer_id,isNew);
+                Save(machine);
+
+
+            }
         }
 
         public void Save(Machine machine)

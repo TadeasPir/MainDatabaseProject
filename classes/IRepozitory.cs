@@ -13,7 +13,6 @@ namespace DatabaseProjectPV.classes
         void Update(T element);
         void Save(T element);
         void Delete(int id);
-
         void Import(string fileName);
     }
 }

@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace DatabaseProjectPV.classes
 {
@@ -72,7 +75,28 @@ namespace DatabaseProjectPV.classes
 
         public void Import(string fileName)
         {
-            throw new NotImplementedException();
+
+            XmlDocument document = new XmlDocument();
+            document.Load(fileName);
+            XmlNodeList nodes = document.SelectNodes("/data/SpareParts");
+            SpareParts spareParts;
+
+
+            foreach (XmlNode node in nodes)
+            {
+
+                string name = node.SelectSingleNode("name").InnerText;
+                string dimenX = node.SelectSingleNode("dimenX").InnerText;
+                string dimenY = node.SelectSingleNode("dimenY").InnerText;
+                string dimenZ = node.SelectSingleNode("dimenZ").InnerText;
+                string type = node.SelectSingleNode("type").InnerText;
+                int price = int.Parse(node.SelectSingleNode("price").InnerText);
+
+                spareParts = new SpareParts(name, type, dimenX, dimenY, dimenZ, price);
+                Save(spareParts);
+
+
+            }
         }
 
         public void Save(SpareParts spare)

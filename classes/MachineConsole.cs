@@ -398,39 +398,31 @@ namespace DatabaseProjectPV.classes
                 switch (option)
                 {
                     case 1:
-                        Console.WriteLine("insert in order:  id,name, type, dimenX, dimenY, dimenZ,  price, weight,  manufacturer id,  isNew");
-                        Machine machine = new Machine(Convert.ToInt32(Console.ReadLine()), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), (float)Convert.ToDouble(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Convert.ToBoolean(Console.ReadLine()));
-                        machineDAO.Save(machine);
+                        machineDAO.Import("\\bin\\Debug\\net6.0\\Import.xml");
 
                         MainMenu();
 
                         break;
                     case 2:
 
-                        Console.WriteLine("insert in order: id, machine id,spare parts id,date");
-                        Replacement replacement = new Replacement(Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Convert.ToDateTime(Console.ReadLine()));
-                        replacementDAO.Save(replacement);
+                        replacementDAO.Import("\\bin\\Debug\\net6.0\\Import.xml");
 
 
                         MainMenu();
                         break;
                     case 3:
 
-                        Console.WriteLine("insert in order:  id, name, type, dimenX, dimenY, dimenZ,  price");
-                        SpareParts spareParts = new SpareParts(Convert.ToInt32(Console.ReadLine()), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Convert.ToInt32(Console.ReadLine()));
-                        sparePartsDAO.Save(spareParts);
+                        sparePartsDAO.Import("\\bin\\Debug\\net6.0\\Import.xml");
 
 
                         MainMenu();
                         break;
                     case 4:
-                        manufacturerDAO.Import("\bin\Debug\net6.0\Import.xml");
+                        manufacturerDAO.Import("\\bin\\Debug\\net6.0\\Import.xml");
                         MainMenu();
                         break;
                     case 5:
-                        Console.WriteLine("insert in order:  id, manufacturer id, phone number");
-                        PhoneNumber phoneNumber = new PhoneNumber(Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Console.ReadLine());
-                        phoneNumberDAO.Save(phoneNumber);
+                        phoneNumberDAO.Import("\\bin\\Debug\\net6.0\\Import.xml");
 
                         MainMenu();
                         break;

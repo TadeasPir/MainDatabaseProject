@@ -5,6 +5,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace DatabaseProjectPV.classes
 {
@@ -71,7 +72,24 @@ namespace DatabaseProjectPV.classes
 
         public void Import(string fileName)
         {
-            throw new NotImplementedException();
+            XmlDocument document = new XmlDocument();
+            document.Load(fileName);
+            XmlNodeList nodes = document.SelectNodes("/data/replacement");
+            Replacement replacement;
+
+
+            foreach (XmlNode node in nodes)
+            {
+               
+                int spareParts_id = int.Parse(node.SelectSingleNode("spareParts_id").InnerText);
+                int machine_id = int.Parse(node.SelectSingleNode("machine_id").InnerText);
+                string date = node.SelectSingleNode("date").InnerText;
+
+                replacement = new Replacement(spareParts_id, machine_id, Convert.ToDateTime(date));
+                Save(replacement);
+
+
+            }
         }
 
         public void Save(Replacement replacement)

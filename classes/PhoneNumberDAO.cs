@@ -5,6 +5,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace DatabaseProjectPV.classes
 {
@@ -67,7 +68,24 @@ namespace DatabaseProjectPV.classes
 
         public void Import(string fileName)
         {
-            throw new NotImplementedException();
+            XmlDocument document = new XmlDocument();
+            document.Load(fileName);
+            XmlNodeList nodes = document.SelectNodes("/data/PhoneNumber");
+            PhoneNumber phoneNumber;
+
+
+            foreach (XmlNode node in nodes)
+            {
+
+                string telphoneNumber = node.SelectSingleNode("phoneNumber").InnerText;
+                int manufacturer_id = int.Parse(node.SelectSingleNode("manufacturer_id").InnerText);
+               
+
+                phoneNumber = new PhoneNumber(manufacturer_id, telphoneNumber);
+                Save(phoneNumber);
+
+
+            }
         }
 
         public void Save(PhoneNumber phone)
