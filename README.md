@@ -59,7 +59,7 @@ Below is an example of how to use the application:
 
 ## License
 
-This project is licensed under the [MIT License]([LICENSE](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt)).
+This project is licensed under the [MIT License]((https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt)).
 
 ## Acknowledgements
 
