@@ -22,7 +22,10 @@ namespace DatabaseProjectPV.classes
                 Console.WriteLine("Problem with access to DB.");
             }
             Console.WriteLine("End");
-        }
+        } 
+           /// <summary>
+           /// Displays the main menu and handles user input.
+           /// </summary>
         public void MainMenu()
         {
             Menu menu = new Menu("Select one option: ");
@@ -72,7 +75,10 @@ namespace DatabaseProjectPV.classes
 
         private bool exit = false;
 
-
+        /// <summary>
+        /// Displays a menu for selecting a table and lists its contents.
+        /// </summary>
+        /// <returns>The selected menu.</returns>
         private Menu MenuSelect()
         {
 
@@ -147,6 +153,11 @@ namespace DatabaseProjectPV.classes
             return null;
 
         }
+
+        /// <summary>
+        /// Displays a menu for adding records to a table.
+        /// </summary>
+        /// <returns>The selected menu.</returns>
         private Menu MenuAdd()
         {
 
@@ -224,6 +235,10 @@ namespace DatabaseProjectPV.classes
             catch (Exception e) { Console.WriteLine(e.Message); }
             return null;
         }
+        /// <summary>
+        /// Displays a menu for deleting records from a table.
+        /// </summary>
+        /// <returns>The selected menu.</returns>
         private Menu MenuDelete()
         {
             Console.WriteLine("Delete from table: ");
@@ -297,6 +312,10 @@ namespace DatabaseProjectPV.classes
             return null;
 
         }
+        /// <summary>
+        /// Displays a menu for changing records in a table.
+        /// </summary>
+        /// <returns>The selected menu.</returns>
         private Menu MenuChange()
         {
             Console.WriteLine("Change in table: ");
@@ -373,6 +392,10 @@ namespace DatabaseProjectPV.classes
             catch (Exception e) { Console.WriteLine(e.Message); }
             return null;
         }
+        /// <summary>
+        /// Displays a menu for importing data into a table.
+        /// </summary>
+        /// <returns>The selected menu.</returns>
 
 
         private Menu MenuImport()
@@ -398,31 +421,30 @@ namespace DatabaseProjectPV.classes
                 switch (option)
                 {
                     case 1:
-                        machineDAO.Import("\\bin\\Debug\\net6.0\\Import.xml");
+                        machineDAO.Import("Import.xml");
 
                         MainMenu();
 
                         break;
                     case 2:
 
-                        replacementDAO.Import("\\bin\\Debug\\net6.0\\Import.xml");
-
+                        replacementDAO.Import("Import.xml");
 
                         MainMenu();
                         break;
                     case 3:
 
-                        sparePartsDAO.Import("\\bin\\Debug\\net6.0\\Import.xml");
+                        sparePartsDAO.Import("Import.xml");
 
 
                         MainMenu();
                         break;
                     case 4:
-                        manufacturerDAO.Import("\\bin\\Debug\\net6.0\\Import.xml");
+                        manufacturerDAO.Import("Import.xml");
                         MainMenu();
                         break;
                     case 5:
-                        phoneNumberDAO.Import("\\bin\\Debug\\net6.0\\Import.xml");
+                        phoneNumberDAO.Import("Import.xml");
 
                         MainMenu();
                         break;

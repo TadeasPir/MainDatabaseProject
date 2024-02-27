@@ -7,6 +7,10 @@ using System.Xml.Linq;
 
 namespace DatabaseProjectPV.classes
 {
+
+    /// <summary>
+    /// Represents a spare parts entry in the database.
+    /// </summary>
     public class SpareParts : IBaseClass
     {
         private int id;

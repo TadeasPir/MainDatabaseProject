@@ -10,11 +10,19 @@ using System.Xml;
 using System.Xml.Linq;
 
 namespace DatabaseProjectPV.classes
-{
+{ 
+    
+    /// <summary>
+    /// Data Access Object (DAO) for handling SpareParts entities.
+    /// </summary>
     public class SparePartsDAO : IRepozitory<SpareParts>
     {
-     
 
+        /// <summary>
+        /// Deletes a spare part with the specified ID.
+        /// </summary>
+        /// <param name="id">The ID of the spare part to delete.</param>
+       
         public void Delete(int id)
         {
             {
@@ -41,6 +49,10 @@ namespace DatabaseProjectPV.classes
                 }
             }
         }
+        /// <summary>
+        /// Retrieves all spare parts from the database.
+        /// </summary>
+        /// <returns>An enumerable collection of SpareParts objects.</returns>
 
         public IEnumerable<SpareParts> GetAll()
         {
@@ -67,18 +79,28 @@ namespace DatabaseProjectPV.classes
                 reader.Close();
             }
         }
+        /// <summary>
+        ///  NOT IMPLEMENTED
+        /// Retrieves a spare part by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the spare part to retrieve.</param>
+        /// <returns>The SpareParts object with the specified ID.</returns
 
         public SpareParts GetByID(int id)
         {
             throw new NotImplementedException();
         }
+        /// <summary>
+        /// Imports spare part data from an XML file into the database.
+        /// </summary>
+        /// <param name="fileName">The name of the XML file containing spare part data.</param>
 
         public void Import(string fileName)
         {
 
             XmlDocument document = new XmlDocument();
             document.Load(fileName);
-            XmlNodeList nodes = document.SelectNodes("/data/SpareParts");
+            XmlNodeList nodes = document.SelectNodes("/data/spareParts");
             SpareParts spareParts;
 
 
@@ -98,6 +120,10 @@ namespace DatabaseProjectPV.classes
 
             }
         }
+        /// <summary>
+        /// Saves a new spare part to the database.
+        /// </summary>
+        /// <param name="spare">The SpareParts object to save.</param>
 
         public void Save(SpareParts spare)
         {
@@ -129,7 +155,10 @@ namespace DatabaseProjectPV.classes
 
             }
         }
-
+        /// <summary>
+        /// Updates an existing spare part in the database.
+        /// </summary>
+        /// <param name="spare">The SpareParts object with updated information.</param>
         public void Update(SpareParts spare)
         {
 

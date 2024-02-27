@@ -9,9 +9,15 @@ using System.Xml;
 
 namespace DatabaseProjectPV.classes
 {
+    /// <summary>
+    /// Data Access Object (DAO) for handling Replacement entities.
+    /// </summary>
     public class ReplacementDAO : IRepozitory<Replacement>
     {
-
+        /// <summary>
+        /// Deletes a replacement with the specified ID.
+        /// </summary>
+        /// <param name="id">The ID of the replacement to delete.</param>
         public void Delete(int id)
         {
             {
@@ -38,7 +44,10 @@ namespace DatabaseProjectPV.classes
                 }
             }
         }
-
+        /// <summary>
+        /// Retrieves all replacements from the database.
+        /// </summary>
+        /// <returns>An enumerable collection of Replacement objects.</returns>
         public IEnumerable<Replacement> GetAll()
         {
 
@@ -65,10 +74,21 @@ namespace DatabaseProjectPV.classes
 
         }
 
+        /// <summary>
+        /// NOT IMPLEMENTED
+        /// Retrieves a replacement by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the replacement to retrieve.</param>
+        /// <returns>The Replacement object with the specified ID.</returns>
         public Replacement GetByID(int id)
         {
             throw new NotImplementedException();
         }
+        /// <summary>
+        /// Imports replacement data from an XML file into the database.
+        /// </summary>
+        /// <param name="fileName">The name of the XML file containing replacement data.</param>
+        
 
         public void Import(string fileName)
         {
@@ -91,6 +111,10 @@ namespace DatabaseProjectPV.classes
 
             }
         }
+        /// <summary>
+        /// Saves a new replacement to the database.
+        /// </summary>
+        /// <param name="replacement">The Replacement object to save.</param>
 
         public void Save(Replacement replacement)
         {
@@ -102,8 +126,6 @@ namespace DatabaseProjectPV.classes
                 command.Parameters.Add(new SqlParameter("@machine_id", replacement.Machine_id));
                 command.Parameters.Add(new SqlParameter("@spareParts_id", replacement.SpareParts_id));
                 command.Parameters.Add(new SqlParameter("@date", replacement.DateTime));
-
-
 
                 try
                 {
@@ -120,7 +142,10 @@ namespace DatabaseProjectPV.classes
 
             }
         }
-
+        /// <summary>
+        /// Updates an existing replacement in the database.
+        /// </summary>
+        /// <param name="replacement">The Replacement object with updated information.</param>
         public void Update(Replacement replacement)
         {
             SqlConnection conn = DatabaseSingleton.GetInstance();

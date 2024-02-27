@@ -10,8 +10,16 @@ using System.Xml;
 
 namespace DatabaseProjectPV.classes
 {
+    /// <summary>
+    /// Data Access Object (DAO) for handling Machine entities.
+    /// </summary>
     internal class MachineDAO : IRepozitory<Machine>
     {
+
+        /// <summary>
+        /// Deletes a machine with the specified ID from the database.
+        /// </summary>
+        /// <param name="id">The ID of the machine to delete.</param>
         public void Delete(int x)
         {
             SqlConnection conn = DatabaseSingleton.GetInstance();
@@ -37,6 +45,10 @@ namespace DatabaseProjectPV.classes
             }
         }
 
+        /// <summary>
+        /// Retrieves all machines from the database.
+        /// </summary>
+        /// <returns>An enumerable collection of Machine objects.</returns>
         public IEnumerable<Machine> GetAll()
         {
             SqlConnection conn = DatabaseSingleton.GetInstance();
@@ -67,10 +79,21 @@ namespace DatabaseProjectPV.classes
 
         }
 
+        /// <summary>
+        /// NOT IMPLEMENTED
+        /// Retrieves a machine by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the machine to retrieve.</param>
+        /// <returns>The Machine object with the specified ID.</returns>
+
         public Machine GetByID(int id)
         {
             throw new NotImplementedException();
         }
+        /// <summary>
+        /// Imports machine data from an XML file into the database.
+        /// </summary>
+        /// <param name="fileName">The name of the XML file containing machine data.</param>
 
         public void Import(string fileName)
         {
@@ -99,6 +122,10 @@ namespace DatabaseProjectPV.classes
 
             }
         }
+        /// <summary>
+        /// Saves a new machine to the database.
+        /// </summary>
+        /// <param name="machine">The Machine object to save.</param>
 
         public void Save(Machine machine)
         {
@@ -132,6 +159,10 @@ namespace DatabaseProjectPV.classes
 
             }
         }
+        /// <summary>
+        /// Updates an existing machine in the database.
+        /// </summary>
+        /// <param name="machine">The Machine object with updated information.</param>
 
         public void Update(Machine machine)
         {

@@ -9,9 +9,18 @@ using System.Xml;
 
 namespace DatabaseProjectPV.classes
 {
+    /// <summary>
+    /// Data Access Object (DAO) for handling PhoneNumber entities.
+    /// </summary>
     public class PhoneNumberDAO : IRepozitory<PhoneNumber>
     {
-      
+        
+
+        /// <summary>
+        /// Deletes a phone number with the specified ID.
+        /// </summary>
+        /// <param name="id">The ID of the phone number to delete.</param>
+
         public void Delete(int id)
         {
             {
@@ -38,6 +47,10 @@ namespace DatabaseProjectPV.classes
                 }
             }
         }
+        /// <summary>
+        /// Retrieves all phone numbers from the database.
+        /// </summary>
+        /// <returns>An enumerable collection of PhoneNumber objects.</returns>
 
         public IEnumerable<PhoneNumber> GetAll()
         {
@@ -60,17 +73,27 @@ namespace DatabaseProjectPV.classes
                 reader.Close();
             }
         }
+        /// <summary>
+        /// NOT IMPLEMENTED
+        /// Retrieves a phone number by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the phone number to retrieve.</param>
+        /// <returns>The PhoneNumber object with the specified ID.</returns>
 
         public PhoneNumber GetByID(int id)
         {
             throw new NotImplementedException();
         }
+        /// <summary>
+        /// Imports phone number data from an XML file into the database.
+        /// </summary>
+        /// <param name="fileName">The name of the XML file containing phone number data.</param>
 
         public void Import(string fileName)
         {
             XmlDocument document = new XmlDocument();
             document.Load(fileName);
-            XmlNodeList nodes = document.SelectNodes("/data/PhoneNumber");
+            XmlNodeList nodes = document.SelectNodes("/data/phoneNumber");
             PhoneNumber phoneNumber;
 
 
@@ -87,6 +110,10 @@ namespace DatabaseProjectPV.classes
 
             }
         }
+        /// <summary>
+        /// Saves a new phone number to the database.
+        /// </summary>
+        /// <param name="phone">The PhoneNumber object to save.</param>
 
         public void Save(PhoneNumber phone)
         {
@@ -115,6 +142,10 @@ namespace DatabaseProjectPV.classes
 
             }
         }
+        /// <summary>
+        /// Updates an existing phone number in the database.
+        /// </summary>
+        /// <param name="phone">The PhoneNumber object with updated information.</param>
 
         public void Update(PhoneNumber phone)
         {

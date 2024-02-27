@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace DatabaseProjectPV.classes
 {
+
+    /// <summary>
+    /// Represents a replacement entry in the database.
+    /// </summary>
     public class Replacement : IBaseClass
     {
         private int id;

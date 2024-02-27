@@ -8,9 +8,15 @@ using System.Xml;
 
 namespace DatabaseProjectPV.classes
 {
+    /// <summary>
+ /// Data Access Object (DAO) for handling Manufacturer entities.
+ /// </summary>
     public class ManufacturerDAO : IRepozitory<Manufacturer>
     {
-      
+        /// <summary>
+        /// Deletes a manufacturer with the specified ID.
+        /// </summary>
+        /// <param name="id">The ID of the manufacturer to delete.</param>
         public void Delete(int id)
         {
             {
@@ -37,6 +43,10 @@ namespace DatabaseProjectPV.classes
                 }
             }
         }
+        /// <summary>
+        /// Retrieves all manufacturers from the database.
+        /// </summary>
+        /// <returns>An enumerable collection of Manufacturer objects.</returns>
 
         public IEnumerable<Manufacturer> GetAll()
         {
@@ -58,12 +68,22 @@ namespace DatabaseProjectPV.classes
                 reader.Close();
             }
         }
+        /// <summary>
+        /// NOT IMPLEMETED
+        /// Retrieves a manufacturer by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the manufacturer to retrieve.</param>
+        /// <returns>The Manufacturer object with the specified ID.</returns>
 
         public Manufacturer GetByID(int id)
         {
             throw new NotImplementedException();
         }
-
+        /// <summary>
+        /// Imports manufacturer data from an XML file into the database.
+        /// </summary>
+        /// <param name="fileName">The name of the XML file containing manufacturer data.</param>
+        
         public void Import(string fileName)
         {
             XmlDocument document = new XmlDocument();
@@ -86,6 +106,10 @@ namespace DatabaseProjectPV.classes
 
 
         }
+        /// <summary>
+        /// Saves a new manufacturer to the database.
+        /// </summary>
+        /// <param name="manufacturer">The Manufacturer object to save.</param>
 
         public void Save(Manufacturer  manufacturer)
         {
@@ -115,6 +139,11 @@ namespace DatabaseProjectPV.classes
             }
         }
 
+        /// <summary>
+        /// Updates an existing manufacturer in the database.
+        /// </summary>
+        /// <param name="manufacturer">The Manufacturer object with updated information.</param>
+        
         public void Update(Manufacturer manufacturer)
         {
 

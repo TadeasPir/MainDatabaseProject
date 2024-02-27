@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace DatabaseProjectPV.classes
 {
+    /// Represents a phone number entry in the database.
+
     public class PhoneNumber : IBaseClass
     {
         private int id;
