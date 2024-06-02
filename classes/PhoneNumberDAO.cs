@@ -12,6 +12,7 @@ namespace DatabaseProjectPV.classes
     /// <summary>
     /// Data Access Object (DAO) for handling PhoneNumber entities.
     /// </summary>
+    /// 
     public class PhoneNumberDAO : IRepozitory<PhoneNumber>
     {
         

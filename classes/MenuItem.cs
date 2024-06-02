@@ -11,6 +11,7 @@ namespace DatabaseProjectPV.classes
     /// </summary>
     public class MenuItem
     {
+
         private string description;
         private Action action;
         /// <summary>

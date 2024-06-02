@@ -12,6 +12,7 @@ namespace DatabaseProjectPV.classes
     /// </summary>
     public class Replacement : IBaseClass
     {
+
         private int id;
         private int spareParts_id;
         private int machine_id;

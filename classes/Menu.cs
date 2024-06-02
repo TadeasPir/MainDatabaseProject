@@ -10,6 +10,7 @@ namespace DatabaseProjectPV.classes
     /// <summary>
     /// Represents a menu containing a collection of menu items.
     /// </summary>**/
+    /// 
     public class Menu
     {
         private string caption { get; init; }

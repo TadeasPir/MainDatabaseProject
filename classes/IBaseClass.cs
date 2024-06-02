@@ -9,6 +9,7 @@ namespace DatabaseProjectPV.classes
     /// <summary>
     /// Represents an interface for classes with an ID property.
     /// </summary>
+    /// 
     public interface IBaseClass
     {
         /// <summary>

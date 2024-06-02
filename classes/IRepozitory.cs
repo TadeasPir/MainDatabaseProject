@@ -11,6 +11,7 @@ namespace DatabaseProjectPV.classes
     /// <summary>
     /// Represents a generic repository interface for CRUD operations.
     /// </summary>
+    /// 
     /// <typeparam name="T">The type of entity the repository operates on.</typeparam>
     public interface IRepozitory<T> where T : IBaseClass
     {

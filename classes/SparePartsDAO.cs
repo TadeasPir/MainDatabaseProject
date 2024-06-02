@@ -15,6 +15,7 @@ namespace DatabaseProjectPV.classes
     /// <summary>
     /// Data Access Object (DAO) for handling SpareParts entities.
     /// </summary>
+    /// 
     public class SparePartsDAO : IRepozitory<SpareParts>
     {
 

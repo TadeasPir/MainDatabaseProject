@@ -11,6 +11,7 @@ namespace DatabaseProjectPV.classes
     /// Represents a machine table in database.
     /// </summary>
 
+
     public class Machine : IBaseClass
     {
         private int id;

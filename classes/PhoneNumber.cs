@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 namespace DatabaseProjectPV.classes
 {
     /// Represents a phone number entry in the database.
-
+    
     public class PhoneNumber : IBaseClass
     {
         private int id;
         private string telephoneNumber;
         private int manufacturer_id;
+
 
         public PhoneNumber(int id, int manufacturer_id, string telephoneNumber)
         {

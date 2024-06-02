@@ -11,6 +11,7 @@ namespace DatabaseProjectPV.classes
     /// <summary>
  /// Data Access Object (DAO) for handling Manufacturer entities.
  /// </summary>
+ /// 
     public class ManufacturerDAO : IRepozitory<Manufacturer>
     {
         /// <summary>

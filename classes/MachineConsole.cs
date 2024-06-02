@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,42 +29,44 @@ namespace DatabaseProjectPV.classes
            /// </summary>
         public void MainMenu()
         {
-            Menu menu = new Menu("Select one option: ");
-            menu.Add(new MenuItem("Print",
+            Menu menu = new Menu("Select one option to edit: ");
+            menu.Add(new MenuItem("Machine",
                 new Action(() =>
                 {
-                    var m = MenuSelect();
+                    var m = MenuMachine();
                     var item = m.Execute();
                     item.Execute();
                 })));
-            menu.Add(new MenuItem("Add",
-                new Action(() =>
-                {
-                    var m = MenuAdd();
-                    var item = m.Execute();
-                    item.Execute();
-                })));
-            menu.Add(new MenuItem("Delete",
-              new Action(() =>
-              {
-                  var m = MenuDelete();
-                  var item = m.Execute();
-                  item.Execute();
-              })));
-            menu.Add(new MenuItem("Change",
+            menu.Add(new MenuItem("Replacement",
              new Action(() =>
              {
-                 var m = MenuChange();
+                 var m = MenuReplacement();
                  var item = m.Execute();
                  item.Execute();
              })));
-            menu.Add(new MenuItem("import",
-            new Action(() =>
-            {
-                var m = MenuImport();
-                var item = m.Execute();
-                item.Execute();
-            })));
+
+            menu.Add(new MenuItem("Manufacturer",
+                new Action(() =>
+                {
+                    var m = MenuManufacturer();
+                    var item = m.Execute();
+                    item.Execute();
+                })));
+            menu.Add(new MenuItem("Spare parts",
+              new Action(() =>
+              {
+                  var m = MenuSpareParts();
+                  var item = m.Execute();
+                  item.Execute();
+              })));
+            menu.Add(new MenuItem("Phone number",
+             new Action(() =>
+             {
+                 var m = MenuPhoneNumber();
+                 var item = m.Execute();
+                 item.Execute();
+             })));
+         
             menu.Add(new MenuItem("Exit program", new Action(() => { exit = true; })));
 
             while (!exit)
@@ -79,44 +82,131 @@ namespace DatabaseProjectPV.classes
         /// Displays a menu for selecting a table and lists its contents.
         /// </summary>
         /// <returns>The selected menu.</returns>
-        private Menu MenuSelect()
+        /// 
+
+        private Menu MenuMachine() 
         {
 
-            Console.WriteLine("Select table: ");
+            Menu m = new Menu("select one: ");
             MachineDAO machineDAO = new MachineDAO();
-            ReplacementDAO replacementDAO = new ReplacementDAO();
-            SparePartsDAO sparePartsDAO = new SparePartsDAO();
-            ManufacturerDAO manufacturerDAO = new ManufacturerDAO();
-            PhoneNumberDAO phoneNumberDAO = new PhoneNumberDAO();
-
-            Console.WriteLine("1. machine");
-            Console.WriteLine("2. replacement");
-            Console.WriteLine("3. spare parts");
-            Console.WriteLine("4. manufacturer");
-            Console.WriteLine("5. phone number");
-     
-            Console.WriteLine("6. back");
-
-            int option = Convert.ToInt32(Console.ReadLine());
-
-            switch (option)
-            {
-                case 1:
+          
+          
+            m.Add(new MenuItem("print",
+                new Action(() =>
+                {
                     foreach (Machine machine in machineDAO.GetAll())
                     {
                         Console.WriteLine($"{machine.ToString()}");
                     }
-                    MainMenu();
 
-                    break;
-                case 2:
+
+                })));
+            m.Add(new MenuItem("add",
+              new Action(() =>
+              {
+                  Console.WriteLine("insert in order:  name, type, dimenX, dimenY, dimenZ,  price, weight,  manufacturer id,  isNew");
+                  Machine machine = new Machine(Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), (float)Convert.ToDouble(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Convert.ToBoolean(Console.ReadLine()));
+                  machineDAO.Save(machine);
+
+              })));
+
+            m.Add(new MenuItem("delete",
+             new Action(() =>
+             {
+                 Console.WriteLine("insert index for deletion");
+                 int index = Convert.ToInt32(Console.ReadLine());
+                 machineDAO.Delete(index);
+
+
+             })));
+            
+            m.Add(new MenuItem("update",
+             new Action(() =>
+             {
+                 Console.WriteLine("insert in order:  id,name, type, dimenX, dimenY, dimenZ,  price, weight,  manufacturer id,  isNew");
+                 Machine machine = new Machine(Convert.ToInt32(Console.ReadLine()), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), (float)Convert.ToDouble(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Convert.ToBoolean(Console.ReadLine()));
+                 machineDAO.Save(machine);
+
+
+             })));
+            m.Add(new MenuItem("import",
+             new Action(() =>
+             {
+                 machineDAO.Import("Import.xml");
+
+
+             })));
+
+          
+            return m;
+
+        }
+        
+        private Menu MenuReplacement()
+        {
+
+            Menu m = new Menu("select one: ");
+            ReplacementDAO replacementDAO = new ReplacementDAO();
+
+            m.Add(new MenuItem("print",
+                new Action(() =>
+                {
                     foreach (Replacement replacement in replacementDAO.GetAll())
                     {
                         Console.WriteLine($"{replacement.ToString()}");
                     }
-                    MainMenu();
-                    break;
-                case 3:
+
+
+                })));
+            m.Add(new MenuItem("add",
+              new Action(() =>
+              {
+                  Console.WriteLine("insert in order:  machine id,spare parts id,date");
+                  Replacement replacement = new Replacement(Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Convert.ToDateTime(Console.ReadLine()));
+                  replacementDAO.Save(replacement);
+
+              })));
+
+            m.Add(new MenuItem("delete",
+             new Action(() =>
+             {
+                 Console.WriteLine("insert index for deletion");
+                int index = Convert.ToInt32(Console.ReadLine());
+                 replacementDAO.Delete(index);
+
+
+             })));
+
+            m.Add(new MenuItem("update",
+             new Action(() =>
+             {
+                 Console.WriteLine("insert in order: id, machine id,spare parts id,date");
+                 Replacement replacement = new Replacement(Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Convert.ToDateTime(Console.ReadLine()));
+                 replacementDAO.Save(replacement);
+
+
+             })));
+            m.Add(new MenuItem("import",
+             new Action(() =>
+             {
+                 replacementDAO.Import("Import.xml");
+
+
+             })));
+
+
+            return m;
+
+        }  
+        private Menu MenuSpareParts()
+        {
+            SparePartsDAO sparePartsDAO = new SparePartsDAO();
+            Menu m = new Menu("select one: ");
+          
+
+            m.Add(new MenuItem("print",
+                new Action(() =>
+                {
 
                     foreach (SpareParts part in sparePartsDAO.GetAll())
                     {
@@ -124,344 +214,162 @@ namespace DatabaseProjectPV.classes
                     }
 
 
-                    MainMenu();
-                    break;
-                case 4:
+                })));
+            m.Add(new MenuItem("add",
+              new Action(() =>
+              {
+                  Console.WriteLine("insert in order:  name, type, dimenX, dimenY, dimenZ,  price");
+                  SpareParts spareParts = new SpareParts(Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Convert.ToInt32(Console.ReadLine()));
+                  sparePartsDAO.Save(spareParts);
+              })));
+
+            m.Add(new MenuItem("delete",
+             new Action(() =>
+             {
+                 Console.WriteLine("insert index for deletion");
+                int index = Convert.ToInt32(Console.ReadLine());
+                 sparePartsDAO.Delete(index);
+
+
+
+             })));
+
+            m.Add(new MenuItem("update",
+             new Action(() =>
+             {
+                 Console.WriteLine("insert in order:  id, name, type, dimenX, dimenY, dimenZ,  price");
+                 SpareParts spareParts = new SpareParts(Convert.ToInt32(Console.ReadLine()), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Convert.ToInt32(Console.ReadLine()));
+                 sparePartsDAO.Save(spareParts);
+
+
+             })));
+            m.Add(new MenuItem("import",
+             new Action(() =>
+             {
+                 sparePartsDAO.Import("Import.xml");
+
+
+             })));
+
+
+            return m;
+
+        } 
+        private Menu MenuManufacturer()
+        {
+     
+            Menu m = new Menu("select one: ");
+            ManufacturerDAO manufacturerDAO = new ManufacturerDAO();
+
+            m.Add(new MenuItem("print",
+                new Action(() =>
+                {
+
                     foreach (Manufacturer manufacturer in manufacturerDAO.GetAll())
                     {
                         Console.WriteLine($"{manufacturer.ToString()}");
                     }
-                    MainMenu();
-                    break;
-                case 5:
+
+
+                })));
+            m.Add(new MenuItem("add",
+              new Action(() =>
+              {
+                  Console.WriteLine("insert name of manufacturer");
+                  Manufacturer manufacturer = new Manufacturer(Console.ReadLine());
+                  manufacturerDAO.Save(manufacturer);
+              })));
+
+            m.Add(new MenuItem("delete",
+             new Action(() =>
+             {
+                 Console.WriteLine("insert index for deletion");
+                 int index = Convert.ToInt32(Console.ReadLine());
+                 manufacturerDAO.Delete(index);
+
+
+
+             })));
+
+            m.Add(new MenuItem("update",
+             new Action(() =>
+             {
+                 Console.WriteLine("insert id + name of manufacturer");
+                 Manufacturer manufacturer = new Manufacturer(Convert.ToInt32(Console.ReadLine()), Console.ReadLine());
+                 manufacturerDAO.Save(manufacturer);
+
+
+             })));
+            m.Add(new MenuItem("import",
+             new Action(() =>
+             {
+                 manufacturerDAO.Import("Import.xml");
+
+
+             })));
+
+
+            return m;
+
+        } 
+        
+        private Menu MenuPhoneNumber()
+        {
+     
+            Menu m = new Menu("select one: ");
+            PhoneNumberDAO phoneNumberDAO = new PhoneNumberDAO();
+
+            m.Add(new MenuItem("print",
+                new Action(() =>
+                {
+
                     foreach (var variable in phoneNumberDAO.GetAll())
                     {
                         Console.WriteLine($"{variable.ToString()}");
                     }
-                    MainMenu();
-                    break;
-                
-                case 6:
-                    MainMenu();
-                    break;
-                default:
-                    Console.WriteLine("invalid value");
-                    MainMenu();
-                    break;
-            }
-
-            return null;
-
-        }
-
-        /// <summary>
-        /// Displays a menu for adding records to a table.
-        /// </summary>
-        /// <returns>The selected menu.</returns>
-        private Menu MenuAdd()
-        {
-
-            Console.WriteLine("Add to table: ");
-            MachineDAO machineDAO = new MachineDAO();
-            ReplacementDAO replacementDAO = new ReplacementDAO();
-            SparePartsDAO sparePartsDAO = new SparePartsDAO();
-            ManufacturerDAO manufacturerDAO = new ManufacturerDAO();
-            PhoneNumberDAO phoneNumberDAO = new PhoneNumberDAO();
-
-            Console.WriteLine("1. machine");
-            Console.WriteLine("2. replacement");
-            Console.WriteLine("3. spare parts");
-            Console.WriteLine("4. manufacturer");
-            Console.WriteLine("5. phone number");
-            
-            Console.WriteLine("6. back");
-
-            int option = Convert.ToInt32(Console.ReadLine());
-            try
-            {
-                switch (option)
-                {
-                    case 1:
-                        Console.WriteLine("insert in order:  name, type, dimenX, dimenY, dimenZ,  price, weight,  manufacturer id,  isNew");
-                        Machine machine = new Machine(Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), (float)Convert.ToDouble(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Convert.ToBoolean(Console.ReadLine()));
-                        machineDAO.Save(machine);
-
-                        MainMenu();
-
-                        break;
-                    case 2:
-
-                        Console.WriteLine("insert in order:  machine id,spare parts id,date");
-                        Replacement replacement = new Replacement(Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Convert.ToDateTime(Console.ReadLine()));
-                        replacementDAO.Save(replacement);
 
 
-                        MainMenu();
-                        break;
-                    case 3:
+                })));
+            m.Add(new MenuItem("add",
+              new Action(() =>
+              {
+                  Console.WriteLine("insert in order:  manufacturer id, phone number");
+                  PhoneNumber phoneNumber = new PhoneNumber(Convert.ToInt32(Console.ReadLine()), Console.ReadLine());
+                  phoneNumberDAO.Save(phoneNumber);
+              })));
 
-                        Console.WriteLine("insert in order:  name, type, dimenX, dimenY, dimenZ,  price");
-                        SpareParts spareParts = new SpareParts(Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Convert.ToInt32(Console.ReadLine()));
-                        sparePartsDAO.Save(spareParts);
-
-
-                        MainMenu();
-                        break;
-                    case 4:
-                        Console.WriteLine("insert name of manufacturer");
-                        Manufacturer manufacturer = new Manufacturer(Console.ReadLine());
-                        manufacturerDAO.Save(manufacturer);
-                        MainMenu();
-                        break;
-                    case 5:
-                        Console.WriteLine("insert in order:  manufacturer id, phone number");
-                        PhoneNumber phoneNumber = new PhoneNumber(Convert.ToInt32(Console.ReadLine()), Console.ReadLine());
-                        phoneNumberDAO.Save(phoneNumber);
-
-                        MainMenu();
-                        break;
-                    
-                    case 6:
-                        MainMenu();
-                        break;
-                    default:
-                        Console.WriteLine("invalid value");
-                        MainMenu();
-                        break;
-                }
+            m.Add(new MenuItem("delete",
+             new Action(() =>
+             {
+                 Console.WriteLine("insert index for deletion");
+                 int index = Convert.ToInt32(Console.ReadLine());
+                 phoneNumberDAO.Delete(index); 
 
 
-            }
-            catch (Exception e) { Console.WriteLine(e.Message); }
-            return null;
-        }
-        /// <summary>
-        /// Displays a menu for deleting records from a table.
-        /// </summary>
-        /// <returns>The selected menu.</returns>
-        private Menu MenuDelete()
-        {
-            Console.WriteLine("Delete from table: ");
-            MachineDAO machineDAO = new MachineDAO();
-            ReplacementDAO replacementDAO = new ReplacementDAO();
-            SparePartsDAO sparePartsDAO = new SparePartsDAO();
-            ManufacturerDAO manufacturerDAO = new ManufacturerDAO();
-            PhoneNumberDAO phoneNumberDAO = new PhoneNumberDAO();
 
-            Console.WriteLine("1. machine");
-            Console.WriteLine("2. replacement");
-            Console.WriteLine("3. spare parts");
-            Console.WriteLine("4. manufacturer");
-            Console.WriteLine("5. phone number");
-     
-            Console.WriteLine("6. back");
-            int index;
-            int option = Convert.ToInt32(Console.ReadLine());
-            try
-            {
-                switch (option)
-                {
-                    case 1:
-                        Console.WriteLine("insert index for deletion");
-                        index = Convert.ToInt32(Console.ReadLine());
-                        machineDAO.Delete(index);
+             })));
 
-                        MainMenu();
-
-                        break;
-                    case 2:
-                        Console.WriteLine("insert index for deletion");
-                        index = Convert.ToInt32(Console.ReadLine());
-                        replacementDAO.Delete(index);
-                        MainMenu();
-                        break;
-                    case 3:
-
-                        Console.WriteLine("insert index for deletion");
-                        index = Convert.ToInt32(Console.ReadLine());
-                        sparePartsDAO.Delete(index);
+            m.Add(new MenuItem("update",
+             new Action(() =>
+             {
+                 Console.WriteLine("insert in order:  id, manufacturer id, phone number");
+                 PhoneNumber phoneNumber = new PhoneNumber(Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Console.ReadLine());
+                 phoneNumberDAO.Save(phoneNumber);
 
 
-                        MainMenu();
-                        break;
-                    case 4:
-                        Console.WriteLine("insert index for deletion");
-                        index = Convert.ToInt32(Console.ReadLine());
-                        manufacturerDAO.Delete(index);
-                        MainMenu();
-                        break;
-                    case 5:
-                        Console.WriteLine("insert index for deletion");
-                        index = Convert.ToInt32(Console.ReadLine());
-                        phoneNumberDAO.Delete(index);
-                        MainMenu();
-                        break;
-                   
-                    case 6:
-                        MainMenu();
-                        break;
-                    default:
-                        Console.WriteLine("invalid value");
-                        MainMenu();
-                        break;
-                }
+             })));
+            m.Add(new MenuItem("import",
+             new Action(() =>
+             {
+                 phoneNumberDAO.Import("Import.xml");
 
 
-            }
-            catch (Exception e) { Console.WriteLine(e.Message); }
-            return null;
+             })));
+
+
+            return m;
 
         }
-        /// <summary>
-        /// Displays a menu for changing records in a table.
-        /// </summary>
-        /// <returns>The selected menu.</returns>
-        private Menu MenuChange()
-        {
-            Console.WriteLine("Change in table: ");
-            MachineDAO machineDAO = new MachineDAO();
-            ReplacementDAO replacementDAO = new ReplacementDAO();
-            SparePartsDAO sparePartsDAO = new SparePartsDAO();
-            ManufacturerDAO manufacturerDAO = new ManufacturerDAO();
-            PhoneNumberDAO phoneNumberDAO = new PhoneNumberDAO();
-
-            Console.WriteLine("1. machine");
-            Console.WriteLine("2. replacement");
-            Console.WriteLine("3. spare parts");
-            Console.WriteLine("4. manufacturer");
-            Console.WriteLine("5. phone number");
-         
-            Console.WriteLine("6. back");
-
-            int option = Convert.ToInt32(Console.ReadLine());
-            try
-            {
-                switch (option)
-                {
-                    case 1:
-                        Console.WriteLine("insert in order:  id,name, type, dimenX, dimenY, dimenZ,  price, weight,  manufacturer id,  isNew");
-                        Machine machine = new Machine(Convert.ToInt32(Console.ReadLine()), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Convert.ToInt32(Console.ReadLine()), (float)Convert.ToDouble(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Convert.ToBoolean(Console.ReadLine()));
-                        machineDAO.Save(machine);
-
-                        MainMenu();
-
-                        break;
-                    case 2:
-
-                        Console.WriteLine("insert in order: id, machine id,spare parts id,date");
-                        Replacement replacement = new Replacement(Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Convert.ToDateTime(Console.ReadLine()));
-                        replacementDAO.Save(replacement);
-
-
-                        MainMenu();
-                        break;
-                    case 3:
-
-                        Console.WriteLine("insert in order:  id, name, type, dimenX, dimenY, dimenZ,  price");
-                        SpareParts spareParts = new SpareParts(Convert.ToInt32(Console.ReadLine()), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Console.ReadLine(), Convert.ToInt32(Console.ReadLine()));
-                        sparePartsDAO.Save(spareParts);
-
-
-                        MainMenu();
-                        break;
-                    case 4:
-                        Console.WriteLine("insert id + name of manufacturer");
-                        Manufacturer manufacturer = new Manufacturer(Convert.ToInt32(Console.ReadLine()), Console.ReadLine());
-                        manufacturerDAO.Save(manufacturer);
-                        MainMenu();
-                        break;
-                    case 5:
-                        Console.WriteLine("insert in order:  id, manufacturer id, phone number");
-                        PhoneNumber phoneNumber = new PhoneNumber(Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine()), Console.ReadLine());
-                        phoneNumberDAO.Save(phoneNumber);
-
-                        MainMenu();
-                        break;
-                    
-                    case 6:
-                        MainMenu();
-                        break;
-                    default:
-                        Console.WriteLine("invalid value");
-                        MainMenu();
-                        break;
-                }
-
-
-            }
-            catch (Exception e) { Console.WriteLine(e.Message); }
-            return null;
-        }
-        /// <summary>
-        /// Displays a menu for importing data into a table.
-        /// </summary>
-        /// <returns>The selected menu.</returns>
-
-
-        private Menu MenuImport()
-        {
-            Console.WriteLine("import to table: ");
-            MachineDAO machineDAO = new MachineDAO();
-            ReplacementDAO replacementDAO = new ReplacementDAO();
-            SparePartsDAO sparePartsDAO = new SparePartsDAO();
-            ManufacturerDAO manufacturerDAO = new ManufacturerDAO();
-            PhoneNumberDAO phoneNumberDAO = new PhoneNumberDAO();
-
-            Console.WriteLine("1. machine");
-            Console.WriteLine("2. replacement");
-            Console.WriteLine("3. spare parts");
-            Console.WriteLine("4. manufacturer");
-            Console.WriteLine("5. phone number");
-
-            Console.WriteLine("6. back");
-
-            int option = Convert.ToInt32(Console.ReadLine());
-            try
-            {
-                switch (option)
-                {
-                    case 1:
-                        machineDAO.Import("Import.xml");
-
-                        MainMenu();
-
-                        break;
-                    case 2:
-
-                        replacementDAO.Import("Import.xml");
-
-                        MainMenu();
-                        break;
-                    case 3:
-
-                        sparePartsDAO.Import("Import.xml");
-
-
-                        MainMenu();
-                        break;
-                    case 4:
-                        manufacturerDAO.Import("Import.xml");
-                        MainMenu();
-                        break;
-                    case 5:
-                        phoneNumberDAO.Import("Import.xml");
-
-                        MainMenu();
-                        break;
-
-                    case 6:
-                        MainMenu();
-                        break;
-                    default:
-                        Console.WriteLine("invalid value");
-                        MainMenu();
-                        break;
-                }
-
-
-            }
-            catch (Exception e) { Console.WriteLine(e.Message); }
-            return null;
-        }
+      
     }
 }

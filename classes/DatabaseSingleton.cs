@@ -11,6 +11,7 @@ namespace DatabaseProjectPV.classes
     /// <summary>
     /// Represents a singleton class for managing database connections.
     /// </summary>
+	/// 
     public class DatabaseSingleton
     {
 		private static SqlConnection conn = null;

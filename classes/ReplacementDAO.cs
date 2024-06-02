@@ -12,6 +12,7 @@ namespace DatabaseProjectPV.classes
     /// <summary>
     /// Data Access Object (DAO) for handling Replacement entities.
     /// </summary>
+    /// 
     public class ReplacementDAO : IRepozitory<Replacement>
     {
         /// <summary>

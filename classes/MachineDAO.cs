@@ -13,6 +13,7 @@ namespace DatabaseProjectPV.classes
     /// <summary>
     /// Data Access Object (DAO) for handling Machine entities.
     /// </summary>
+    /// 
     internal class MachineDAO : IRepozitory<Machine>
     {
 
